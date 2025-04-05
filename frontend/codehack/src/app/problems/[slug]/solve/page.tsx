@@ -29,6 +29,8 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
     if (problem) {
       const boilerplate = problem?.functionTemplates[language]?.boilerplate;
       const finalCode = boilerplate.replace('{user_code}', code.trim());
+      console.log("problem", problem)
+      console.log("language", language)
       console.log('Submitting this code:', finalCode);
     }
   };
