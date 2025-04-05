@@ -55,7 +55,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
               </p>
 
               <h3 className="text-lg font-semibold mt-6 mb-4">Examples</h3>
-              {problem.test_cases.map((testCase: any, index: number) => (
+              {problem.test_cases.slice(0, 2).map((testCase: any, index: number) => (
                 <div key={index} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
                   <div className="font-mono">
                     <p><strong>Input:</strong> {testCase.input}</p>
@@ -64,12 +64,6 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
                 </div>
               ))}
 
-              <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
-                <h3 className="text-lg font-semibold mb-2">Function Format</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
-                  Your function should accept input as a string and return the result as a string.
-                </p>
-              </div>
             </div>
           </div>
         </div>
