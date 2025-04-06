@@ -35,11 +35,10 @@ export default function ProblemPage({ params }: Props) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <h1 className="text-3xl font-bold mb-2">{problem.title}</h1>
-      <span className={`px-2 py-1 rounded-full text-sm ${
-        problem.difficulty === "Easy" ? "bg-green-100 text-green-800" :
-        problem.difficulty === "Medium" ? "bg-yellow-100 text-yellow-800" :
-        "bg-red-100 text-red-800"
-      }`}>
+      <span className={`px-2 py-1 rounded-full text-sm ${problem.difficulty === "Easy" ? "bg-green-100 text-green-800" :
+          problem.difficulty === "Medium" ? "bg-yellow-100 text-yellow-800" :
+            "bg-red-100 text-red-800"
+        }`}>
         {problem.difficulty}
       </span>
 

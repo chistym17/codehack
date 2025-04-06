@@ -4,34 +4,75 @@ import { useState, useEffect, use } from 'react';
 import Editor from '@monaco-editor/react';
 import problems from '../../../../../public/problems.json';
 
+interface TestCase {
+  input: string;
+  output: string;
+}
+
+interface FunctionTemplate {
+  default: string;
+  boilerplate: string;
+}
+
+interface Problem {
+  slug: string;
+  statement: string;
+  test_cases: TestCase[];
+  functionTemplates: {
+    python: FunctionTemplate;
+    cpp: FunctionTemplate;
+    c: FunctionTemplate;
+  };
+}
+
+type Language = 'python' | 'cpp' | 'c';
+
 export default function ProblemSolvePage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const [code, setCode] = useState('');
-  const [problem, setProblem] = useState<any>(null);
-  const [language, setLanguage] = useState('cpp');
+  const [problem, setProblem] = useState<Problem | null>(null);
+  const [language, setLanguage] = useState<Language>('cpp');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const currentProblem = problems.find(p => p.slug === resolvedParams.slug);
-    setProblem(currentProblem);
     if (currentProblem) {
-      setCode(problem?.functionTemplates[language]?.default
-      );
+      setProblem(currentProblem as Problem);
+      setCode(currentProblem.functionTemplates[language]?.default || '');
     }
-  }, [resolvedParams.slug]);
+  }, [resolvedParams.slug, language]);
 
   useEffect(() => {
-    if (problem) {
-      setCode(problem?.functionTemplates[language]?.default);
+    if (problem && problem.functionTemplates[language]) {
+      setCode(problem.functionTemplates[language].default);
     }
-  }, [language]);
+  }, [language, problem]);
 
-  const handleSubmit = () => {
-    if (problem) {
-      const boilerplate = problem?.functionTemplates[language]?.boilerplate;
-      const finalCode = boilerplate.replace('{user_code}', code.trim());
-      console.log("problem", problem)
-      console.log("language", language)
-      console.log('Submitting this code:', finalCode);
+  const handleSubmit = async () => {
+    if (!problem || !code) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('http://localhost:5000/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullCode: code,
+          language: language,
+          problem: {
+            test_cases: problem.test_cases
+          }
+        })
+      });
+
+      const data = await response.json();
+      console.log('Submission response:', data);
+    } catch (error) {
+      console.error('Submission error:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -57,7 +98,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
               </p>
 
               <h3 className="text-lg font-semibold mt-6 mb-4">Examples</h3>
-              {problem.test_cases.slice(0, 2).map((testCase: any, index: number) => (
+              {problem.test_cases.slice(0, 2).map((testCase: TestCase, index: number) => (
                 <div key={index} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
                   <div className="font-mono">
                     <p><strong>Input:</strong> {testCase.input}</p>
@@ -74,21 +115,25 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
           <div className="bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-4">
               <select
-                className="bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-2 text-sm"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 value={language}
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => setLanguage(e.target.value as Language)}
               >
-                <option value="cpp">cpp</option>
+                <option value="cpp">C++</option>
                 <option value="python">Python</option>
-                <option value="c">c</option>
+                <option value="c">C</option>
               </select>
               <button
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                className={`px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors duration-200 ${isSubmitting
+                    ? 'bg-green-500 cursor-not-allowed'
+                    : 'bg-green-600 hover:bg-green-700'
+                  }`}
                 onClick={handleSubmit}
+                disabled={isSubmitting}
               >
-                Submit
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
-              <button className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-medium">
+              <button className="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200">
                 Run
               </button>
             </div>
