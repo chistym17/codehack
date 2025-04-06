@@ -22,8 +22,6 @@ async function submitTestCase(fullCode, language, input, output, testCaseNumber)
         throw new Error('Unsupported language');
     }
 
-    console.log(`[Submit] Submitting test case ${testCaseNumber} for language ${language}`);
-
     const submissionRes = await axios.post(
         `https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true`,
         {
