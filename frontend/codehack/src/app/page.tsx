@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
-      
+
       <main className="pt-16">
         <div className="relative overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -26,17 +26,11 @@ export default function Home() {
                 Join thousands of developers solving algorithmic challenges and improving their problem-solving abilities.
               </p>
               <div className="flex justify-center gap-4">
-                <Link 
+                <Link
                   href="/problems"
                   className="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-lg text-lg transition-all hover:scale-105 hover:shadow-lg"
                 >
                   Start Coding Now
-                </Link>
-                <Link 
-                  href="/leaderboard"
-                  className="bg-white text-gray-900 font-semibold px-8 py-4 rounded-lg text-lg transition-all hover:scale-105 hover:shadow-lg border border-gray-200"
-                >
-                  View Leaderboard
                 </Link>
               </div>
             </div>
