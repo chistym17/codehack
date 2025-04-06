@@ -11,10 +11,49 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const languageMap = {
-    python: 71,
-    cpp: 54,
-    c: 50,
+    python: { id: 71, extension: '.py' },
+    cpp: { id: 54, extension: '.cpp' },
+    c: { id: 50, extension: '.c' },
 };
+
+async function submitTestCase(fullCode, language, input, output, testCaseNumber) {
+    const languageInfo = languageMap[language.toLowerCase()];
+    if (!languageInfo) {
+        throw new Error('Unsupported language');
+    }
+
+    console.log(`[Submit] Submitting test case ${testCaseNumber} for language ${language}`);
+
+    const submissionRes = await axios.post(
+        `https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true`,
+        {
+            source_code: fullCode,
+            language_id: languageInfo.id,
+            stdin: input,
+            expected_output: output
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-rapidapi-key': process.env.RAPIDAPI_KEY,
+                'x-rapidapi-host': process.env.RAPIDAPI_HOST
+            }
+        }
+    );
+
+    const result = submissionRes.data;
+    const passed = result.status.id === 3 && result.stdout.trim() === output.trim();
+
+    return {
+        testCaseNumber,
+        input,
+        expected_output: output,
+        actual_output: result.stdout,
+        passed,
+        status: passed ? 'Passed' : 'Failed',
+        error: result.stderr || result.compile_output || null
+    };
+}
 
 app.post('/submit', async (req, res) => {
     const { fullCode, language, problem } = req.body;
@@ -23,45 +62,42 @@ app.post('/submit', async (req, res) => {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    const languageId = languageMap[language.toLowerCase()];
-    if (!languageId) {
-        return res.status(400).json({ error: 'Unsupported language' });
-    }
-
     try {
         const results = [];
+        let failedTestCase = null;
 
-        for (const testCase of problem.test_cases) {
-            const submissionRes = await axios.post(
-                `${process.env.JUDGE0_API_URL}/submissions?base64_encoded=false&wait=false`,
-                {
-                    source_code: fullCode,
-                    language_id: languageId,
-                    stdin: testCase.input,
-                    expected_output: testCase.output,
-                }
+        for (let i = 0; i < problem.test_cases.length; i++) {
+            const testCase = problem.test_cases[i];
+            const result = await submitTestCase(
+                fullCode,
+                language,
+                testCase.input,
+                testCase.output,
+                i + 1
             );
 
-            const token = submissionRes.data.token;
-
-            const resultRes = await axios.get(
-                `${process.env.JUDGE0_API_URL}/submissions/${token}?base64_encoded=false`
-            );
-
-            const resultData = resultRes.data;
-            results.push({
-                input: testCase.input,
-                expected_output: testCase.output,
-                actual_output: resultData.stdout?.trim() || '',
-                passed: resultData.stdout?.trim() === testCase.output.trim(),
-                status: resultData.status?.description,
-            });
+            results.push(result);
+            if (!result.passed && failedTestCase === null) {
+                failedTestCase = i + 1;
+            }
         }
 
-        return res.status(200).json({ results });
+        const summary = {
+            totalTests: results.length,
+            passed: results.filter(r => r.passed).length,
+            failed: results.filter(r => !r.passed).length,
+            firstFailedTest: failedTestCase
+        };
+
+        return res.status(200).json({
+            message: 'All test cases processed.',
+            summary,
+            results
+        });
+
     } catch (error) {
-        console.error('Judge0 error:', error.response?.data || error.message);
-        return res.status(500).json({ error: 'Code execution failed' });
+        console.error('Error during submission:', error.message);
+        return res.status(500).json({ error: 'Failed to submit code' });
     }
 });
 
