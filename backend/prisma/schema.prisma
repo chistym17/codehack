@@ -27,13 +27,15 @@ model Problem {
   description String
   difficulty String
   slug String @unique
-
+  submissions Submission[]
 }
 
 model Submission {
   id    Int     @id @default(autoincrement())
   code  String
   userId Int
+  problemId Int
   User  User @relation(fields: [userId], references: [id])
+  Problem  Problem @relation(fields: [problemId], references: [id])
   createdAt DateTime @default(now())
 }

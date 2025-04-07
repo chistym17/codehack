@@ -17,7 +17,7 @@ export default function ProblemsPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white bg-clip-text  bg-gradient-to-r from-blue-600 to-purple-600">
             Problems
           </h1>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -67,10 +67,10 @@ export default function ProblemsPage() {
                   <td className="px-6 py-4">
                     <span
                       className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${problem.difficulty === 'easy'
-                          ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
-                          : problem.difficulty === 'medium'
-                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
-                            : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                        : problem.difficulty === 'medium'
+                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
                         }`}
                     >
                       {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
