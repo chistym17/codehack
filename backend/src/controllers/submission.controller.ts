@@ -6,19 +6,26 @@ const prisma = new PrismaClient();
 
 export const createSubmission = async (req: Request, res: Response) => {
   try {
-    const { code, userId, problemId } = req.body;
+    const { code, userId, problemId, status } = req.body;
+
+    if (!code || !userId || !problemId || !status) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
 
     const submission = await prisma.submission.create({
       data: {
         code,
         userId,
+        status,
         problemId
       }
     });
 
-    res.status(201).json(submission);
+    console.log(submission);
+
+    return res.status(201).json(submission);
   } catch (error) {
-    res.status(500).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: 'Something went wrong' });
   }
 };
 

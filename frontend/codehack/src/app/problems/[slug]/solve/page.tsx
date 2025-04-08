@@ -4,6 +4,7 @@ import { useState, useEffect, use } from 'react';
 import Editor from '@monaco-editor/react';
 import problems from '../../../../../public/problems.json';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAuth } from '@/hooks/useAuth';
 
 interface TestCase {
   input: string;
@@ -34,6 +35,7 @@ interface FunctionTemplate {
 }
 
 interface Problem {
+  sid: number;
   slug: string;
   statement: string;
   test_cases: TestCase[];
@@ -53,6 +55,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   const [language, setLanguage] = useState<Language>('cpp');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     const currentProblem = problems.find(p => p.slug === resolvedParams.slug);
@@ -78,7 +81,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
     setSubmissionResult(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/submissions/submit', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +97,6 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
 
       const data: SubmissionResponse = await response.json();
       setSubmissionResult(data);
-      console.log(data);
 
 
       if (data?.summary?.failed === 0) {
@@ -102,6 +104,23 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
       } else {
         toast.error(`submission failed. try again`);
       }
+
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          code: code,
+          userId: user?.id,
+          status: data?.summary?.failed === 0 ? 'ACCEPTED' : 'FAILED',
+          problemId: problem.sid
+        })
+      });
+      const submissionData = await res.json();
+
+
+
     } catch (error) {
       console.error('Submission error:', error);
       toast.error('Failed to submit code');
