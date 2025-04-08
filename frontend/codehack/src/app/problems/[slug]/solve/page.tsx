@@ -78,7 +78,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
     setSubmissionResult(null);
 
     try {
-      const response = await fetch('http://localhost:5000/submit', {
+      const response = await fetch('http://localhost:5000/api/submissions/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,12 +94,13 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
 
       const data: SubmissionResponse = await response.json();
       setSubmissionResult(data);
+      console.log(data);
 
 
-      if (data.summary.failed === 0) {
+      if (data?.summary?.failed === 0) {
         toast.success('All test cases passed!');
       } else {
-        toast.error(`Failed ${data.summary.failed} test case(s)`);
+        toast.error(`submission failed. try again`);
       }
     } catch (error) {
       console.error('Submission error:', error);
@@ -145,7 +146,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
                 <div className="mt-6">
                   <h3 className="text-lg font-semibold mb-4">Test Results</h3>
                   <div className="space-y-4">
-                    {submissionResult.results.map((result, index) => (
+                    {submissionResult?.results?.map((result, index) => (
                       <div
                         key={index}
                         className={`p-4 rounded-lg ${result.passed
@@ -170,8 +171,17 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
                     ))}
                   </div>
                   <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                    <p className="text-sm font-medium">
-                      Summary: {submissionResult.summary.passed} passed, {submissionResult.summary.failed} failed
+                    <p className="text-sm font-medium flex items-center gap-2">
+                      {submissionResult?.summary?.passed > 0 && (
+                        <span className="text-green-600 dark:text-green-400">
+                          {submissionResult.summary.passed} Passed ✓
+                        </span>
+                      )}
+                      {submissionResult?.summary?.failed > 0 && (
+                        <span className="text-red-600 dark:text-red-400">
+                          {submissionResult.summary.failed} Failed ✗
+                        </span>
+                      )}
                     </p>
                   </div>
                 </div>

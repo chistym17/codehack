@@ -35,7 +35,13 @@ model Submission {
   code  String
   userId Int
   problemId Int
+  status SubmissionStatus
   User  User @relation(fields: [userId], references: [id])
   Problem  Problem @relation(fields: [problemId], references: [id])
   createdAt DateTime @default(now())
+}
+
+enum SubmissionStatus {
+  FAILED
+  ACCEPTED
 }
