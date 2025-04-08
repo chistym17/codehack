@@ -54,6 +54,19 @@ export const getUserSubmissions = async (req: Request, res: Response) => {
   }
 };
 
+export const getSubmissionById = async (req: Request, res: Response) => {
+  try {
+    const { userId, problemId } = req.params;
+    const submission = await prisma.submission.findMany({
+      where: { userId: parseInt(userId), problemId: parseInt(problemId) }
+    });
+
+    return res.json(submission);
+  } catch (error) {
+    return res.status(500).json({ error: 'Something went wrong' });
+  }
+};
+
 export const submitCode = async (req: Request, res: Response) => {
   const { fullCode, language, problem } = req.body;
 
