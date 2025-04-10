@@ -75,7 +75,7 @@ export default function Navbar() {
                         <Menu.Item>
                           {({ active }: MenuItemProps) => (
                             <Link
-                              href="/profile"
+                              href="/"
                               className={`${active ? 'bg-slate-100 dark:bg-slate-700 text-teal-500 dark:text-teal-400' : 'text-slate-700 dark:text-slate-200'
                                 } flex items-center px-4 py-3 text-sm transition-colors`}
                             >
@@ -89,7 +89,7 @@ export default function Navbar() {
                         <Menu.Item>
                           {({ active }: MenuItemProps) => (
                             <Link
-                              href="/settings"
+                              href="/"
                               className={`${active ? 'bg-slate-100 dark:bg-slate-700 text-teal-500 dark:text-teal-400' : 'text-slate-700 dark:text-slate-200'
                                 } flex items-center px-4 py-3 text-sm transition-colors`}
                             >
