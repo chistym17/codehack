@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { useAuthContext } from '@/providers/AuthProvider';
 
@@ -11,10 +12,12 @@ const demoAccount = {
 };
 
 export default function AuthPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirect') || '/problems';
+  const { login, isAuthenticated } = useAuthContext();
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const { login } = useAuthContext();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +32,7 @@ export default function AuthPage() {
 
     try {
       const endpoint = isLogin ? '/api/auth/signin' : '/api/auth/signup';
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
@@ -43,7 +46,7 @@ export default function AuthPage() {
 
       login(result);
       toast.success(isLogin ? 'Welcome back!' : 'Account created successfully!');
-      router.push('/problems');
+      router.push(redirect);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Something went wrong');
     } finally {
@@ -54,7 +57,7 @@ export default function AuthPage() {
   const handleDemoLogin = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signin', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(demoAccount)
@@ -65,13 +68,18 @@ export default function AuthPage() {
 
       login(result);
       toast.success('Welcome to the demo account!');
-      router.push('/problems');
+      router.push(redirect);
     } catch (error) {
       toast.error('Failed to login with demo account');
     } finally {
       setLoading(false);
     }
   };
+
+  if (isAuthenticated) {
+    router.push(redirect);
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 pt-16 px-4">
@@ -128,33 +136,34 @@ export default function AuthPage() {
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-            >
-              {loading ? 'Processing...' : isLogin ? 'Sign In' : 'Sign Up'}
-            </button>
+            <div className="flex justify-center space-x-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+              >
+                {loading ? 'Signing in...' : isLogin ? 'Sign in' : 'Create account'}
+              </button>
+              <button
+                onClick={handleDemoLogin}
+                disabled={loading}
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105 ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+              >
+                <span className="font-bold">Demo Account</span>
+              </button>
+            </div>
+
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
+              >
+                {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+              </button>
+            </div>
           </form>
-
-          {isLogin && (
-            <button
-              onClick={handleDemoLogin}
-              disabled={loading}
-              className="w-full mt-4 flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-            >
-              Try Demo Account
-            </button>
-          )}
-
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300"
-            >
-              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
-            </button>
-          </div>
         </div>
       </div>
     </div>

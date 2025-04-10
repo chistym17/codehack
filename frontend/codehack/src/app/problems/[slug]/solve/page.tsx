@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-import Editor from '@monaco-editor/react';
+import { useRouter } from 'next/navigation';
+import CodeEditor from '@/components/problems/CodeEditor';
+import ProblemStatement from '@/components/problems/ProblemStatement';
 import problems from '../../../../../public/problems.json';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
@@ -56,81 +58,30 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
   const { user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
+    if (!user) {
+      router.push(`/auth?redirect=${encodeURIComponent(window.location.pathname)}`);
+    }
+  }, [user, router]);
+
+  useEffect(() => {
+    if (!resolvedParams) return;
+    
     const currentProblem = problems.find(p => p.slug === resolvedParams.slug);
     if (currentProblem) {
       setProblem(currentProblem as Problem);
       setCode(currentProblem.functionTemplates[language]?.default || '');
     }
-  }, [resolvedParams.slug, language]);
-
-  useEffect(() => {
-    if (problem && problem.functionTemplates[language]) {
-      setCode(problem.functionTemplates[language].default);
-    }
-  }, [language, problem]);
-
-  const handleSubmit = async () => {
-    if (!problem || !code) return;
-
-    const fullcode = problem.functionTemplates[language]?.boilerplate.replace('{user_code}', code);
-    console.log(fullcode);
-
-    setIsSubmitting(true);
-    setSubmissionResult(null);
-
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/submit`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullCode: fullcode,
-          language: language,
-          problem: {
-            test_cases: problem.test_cases
-          }
-        })
-      });
-
-      const data: SubmissionResponse = await response.json();
-      setSubmissionResult(data);
-
-
-      if (data?.summary?.failed === 0) {
-        toast.success('All test cases passed!');
-      } else {
-        toast.error(`submission failed. try again`);
-      }
-
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          code: code,
-          userId: user?.id,
-          status: data?.summary?.failed === 0 ? 'ACCEPTED' : 'FAILED',
-          problemId: problem.sid
-        })
-      });
-      const submissionData = await res.json();
-
-
-
-    } catch (error) {
-      console.error('Submission error:', error);
-      toast.error('Failed to submit code');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  }, [resolvedParams, language]);
 
   if (!problem) {
     return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return null; // This should never happen due to the redirect above
   }
 
   return (
@@ -138,117 +89,23 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
       <Toaster position="top-right" />
       <div className="h-[calc(100vh-64px)] flex">
         <div className="w-[45%] overflow-y-auto border-r border-gray-200 dark:border-gray-700">
-          <div className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {problem.slug.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-              </h1>
-            </div>
-
-            <div className="prose dark:prose-invert max-w-none">
-              <h2 className="text-xl font-semibold mb-4">Problem Description</h2>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
-                {problem.statement}
-              </p>
-
-              <h3 className="text-lg font-semibold mt-6 mb-4">Examples</h3>
-              {problem.test_cases.slice(0, 2).map((testCase: TestCase, index: number) => (
-                <div key={index} className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4">
-                  <div className="font-mono">
-                    <p><strong>Input:</strong> {testCase.input}</p>
-                    <p><strong>Output:</strong> {testCase.output}</p>
-                  </div>
-                </div>
-              ))}
-
-              {submissionResult && (
-                <div className="mt-6">
-                  <h3 className="text-lg font-semibold mb-4">Test Results</h3>
-                  <div className="space-y-4">
-                    {submissionResult?.results?.map((result, index) => (
-                      <div
-                        key={index}
-                        className={`p-4 rounded-lg ${result.passed
-                          ? 'bg-green-100 dark:bg-green-800/30'
-                          : 'bg-red-100 dark:bg-red-800/30'
-                          }`}
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className={`text-sm font-medium ${result.passed
-                            ? 'text-green-700 dark:text-green-300'
-                            : 'text-red-700 dark:text-red-300'
-                            }`}>
-                            Test Case {index + 1}: {result.passed ? 'Passed ✓' : 'Failed ✗'}
-                          </span>
-                        </div>
-                        {!result.passed && (
-                          <div className="mt-2 text-sm space-y-1 font-mono">
-                            <p><strong>Input:</strong> {result.input}</p>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-                    <p className="text-sm font-medium flex items-center gap-2">
-                      {submissionResult?.summary?.passed > 0 && (
-                        <span className="text-green-600 dark:text-green-400">
-                          {submissionResult.summary.passed} Passed ✓
-                        </span>
-                      )}
-                      {submissionResult?.summary?.failed > 0 && (
-                        <span className="text-red-600 dark:text-red-400">
-                          {submissionResult.summary.failed} Failed ✗
-                        </span>
-                      )}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          <ProblemStatement 
+            problem={problem} 
+            submissionResult={submissionResult}
+          />
         </div>
-
-        <div className="flex-1 flex flex-col">
-          <div className="bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700">
-            <div className="flex items-center gap-4">
-              <select
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as Language)}
-              >
-                <option value="cpp">C++</option>
-                <option value="python">Python</option>
-                <option value="c">C</option>
-              </select>
-              <button
-                className={`px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors duration-200 ${isSubmitting
-                  ? 'bg-green-500 cursor-not-allowed'
-                  : 'bg-green-600 hover:bg-green-700'
-                  }`}
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit'}
-              </button>
-            </div>
-          </div>
-
-          <div className="flex-1">
-            <Editor
-              height="100%"
-              language={language}
-              value={code}
-              theme="vs-dark"
-              onChange={(value) => setCode(value || '')}
-              options={{
-                minimap: { enabled: false },
-                fontSize: 14,
-                lineNumbers: 'on',
-                automaticLayout: true,
-              }}
-            />
-          </div>
+        <div className="w-[55%]">
+          <CodeEditor
+            problem={problem}
+            language={language}
+            setLanguage={setLanguage}
+            code={code}
+            setCode={setCode}
+            isSubmitting={isSubmitting}
+            setIsSubmitting={setIsSubmitting}
+            submissionResult={submissionResult}
+            setSubmissionResult={setSubmissionResult}
+          />
         </div>
       </div>
     </div>

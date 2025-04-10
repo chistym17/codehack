@@ -82,13 +82,6 @@ export default function Home() {
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-teal-600 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 </Link>
-                <Link
-                  href="/learn"
-                  className="group bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 font-semibold px-8 py-4 rounded-xl text-lg transition-all hover:bg-slate-50 dark:hover:bg-slate-700 hover:shadow-lg flex items-center justify-center gap-2"
-                >
-                  Explore Tutorials
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
               </div>
             </div>
 

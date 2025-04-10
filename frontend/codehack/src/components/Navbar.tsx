@@ -45,12 +45,6 @@ export default function Navbar() {
               >
                 Problems
               </Link>
-              <Link
-                href="/leaderboard"
-                className="text-slate-700 dark:text-slate-200 hover:text-teal-500 dark:hover:text-teal-400 px-4 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all font-medium"
-              >
-                Leaderboard
-              </Link>
 
               {isAuthenticated ? (
                 <Menu as="div" className="relative ml-4">
@@ -128,12 +122,6 @@ export default function Navbar() {
                 </Menu>
               ) : (
                 <div className="ml-4 flex items-center space-x-3">
-                  <Link
-                    href="/auth/register"
-                    className="text-slate-700 dark:text-slate-200 hover:text-teal-500 dark:hover:text-teal-400 font-medium transition-colors"
-                  >
-                    Register
-                  </Link>
                   <Link
                     href="/auth"
                     className="group relative inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-lg transition-all overflow-hidden"
