@@ -54,6 +54,7 @@ export default function CodeEditor({
       });
 
       const data = await response.json();
+      console.log(data);
       setSubmissionResult(data);
 
       if (data?.summary?.failed === 0) {

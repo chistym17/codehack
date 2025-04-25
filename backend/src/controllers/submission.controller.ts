@@ -60,6 +60,9 @@ export const getSubmissionById = async (req: Request, res: Response) => {
     const submission = await prisma.submission.findMany({
       where: { userId: parseInt(userId), problemId: parseInt(problemId) }
     });
+    if (!submission) {
+      return res.status(404).json({ error: 'No Submissions found' });
+    }
 
     return res.json(submission);
   } catch (error) {

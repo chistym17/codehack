@@ -4,6 +4,7 @@ import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import CodeEditor from '@/components/problems/CodeEditor';
 import ProblemStatement from '@/components/problems/ProblemStatement';
+import SubmissionList from '@/components/problems/SubmissionList';
 import problems from '../../../../../public/problems.json';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
@@ -57,6 +58,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   const [language, setLanguage] = useState<Language>('cpp');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
+  const [selectedTab, setSelectedTab] = useState<'problem' | 'submissions'>('problem');
   const { user } = useAuth();
   const router = useRouter();
 
@@ -89,11 +91,29 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
       <Toaster position="top-right" />
       <div className="h-[calc(100vh-64px)] flex">
         <div className="w-[45%] overflow-y-auto border-r border-gray-200 dark:border-gray-700">
-          <ProblemStatement
-            problem={problem}
-            submissionResult={submissionResult}
-            isSubmitting={isSubmitting}
-          />
+          <div className="flex items-center border-b border-gray-200 dark:border-gray-700 mb-4 mt-4">
+            <button
+              className={`px-4 py-2 font-medium focus:outline-none ${selectedTab === 'problem' ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300'}`}
+              onClick={() => setSelectedTab('problem')}
+            >
+              Problem
+            </button>
+            <button
+              className={`ml-2 px-4 py-2 font-medium focus:outline-none ${selectedTab === 'submissions' ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300'}`}
+              onClick={() => setSelectedTab('submissions')}
+            >
+              Submissions
+            </button>
+          </div>
+          {selectedTab === 'problem' ? (
+            <ProblemStatement
+              problem={problem}
+              submissionResult={submissionResult}
+              isSubmitting={isSubmitting}
+            />
+          ) : (
+            <SubmissionList userId={Number(user.id)} problemId={Number(problem.sid)} />
+          )}
         </div>
         <div className="w-[55%]">
           <CodeEditor
