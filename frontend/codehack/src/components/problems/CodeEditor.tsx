@@ -31,7 +31,11 @@ export default function CodeEditor({
   const { user } = useAuth();
 
   const handleSubmit = async () => {
-    if (!problem || !code) return;
+    if (!problem) return;
+    if (!code) {
+      toast.error('Please write some code before submitting.');
+      return;
+    }
 
     const fullcode = problem.functionTemplates[language]?.boilerplate.replace('{user_code}', code);
 
@@ -53,14 +57,17 @@ export default function CodeEditor({
         })
       });
 
+      if (!response.ok) {
+        throw new Error('Failed to submit code');
+      }
+
       const data = await response.json();
-      console.log(data);
       setSubmissionResult(data);
 
       if (data?.summary?.failed === 0) {
         toast.success('All test cases passed!');
       } else {
-        toast.error(`submission failed. try again`);
+        toast.error(`Submission failed. Try again.`);
       }
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions`, {
@@ -75,7 +82,7 @@ export default function CodeEditor({
           problemId: problem.sid
         })
       });
-      const submissionData = await res.json();
+      await res.json();
 
     } catch (error) {
       console.error('Submission error:', error);

@@ -33,9 +33,8 @@ const SubmissionList: React.FC<SubmissionListProps> = ({ userId, problemId }) =>
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch(`http://localhost:5000/api/submissions/${userId}/${problemId}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/submissions/${userId}/${problemId}`);
         if (!res.ok) throw new Error('Failed to fetch');
-        console.log(res);
         const data = await res.json();
         if (Array.isArray(data)) {
           setSubmissions(data);
