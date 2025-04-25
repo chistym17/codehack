@@ -6,9 +6,10 @@ import { SubmissionResponse } from '../../types/submissions';
 interface ProblemStatementProps {
   problem: Problem;
   submissionResult: SubmissionResponse | null;
+  isSubmitting: boolean;
 }
 
-export default function ProblemStatement({ problem, submissionResult }: ProblemStatementProps) {
+export default function ProblemStatement({ problem, submissionResult, isSubmitting }: ProblemStatementProps) {
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
@@ -33,7 +34,26 @@ export default function ProblemStatement({ problem, submissionResult }: ProblemS
           </div>
         ))}
 
-        {submissionResult && (
+        {isSubmitting && (
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold mb-4">Evaluating Test Cases</h3>
+            <div className="space-y-4">
+              {problem.test_cases.map((_, index) => (
+                <div key={index} className="p-4 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center gap-2">
+                  <svg className="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                  </svg>
+                  <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
+                    Test Case {index + 1}: Evaluating...
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!isSubmitting && submissionResult && (
           <div className="mt-6">
             <h3 className="text-lg font-semibold mb-4">Test Results</h3>
             <div className="space-y-4">

@@ -68,7 +68,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
 
   useEffect(() => {
     if (!resolvedParams) return;
-    
+
     const currentProblem = problems.find(p => p.slug === resolvedParams.slug);
     if (currentProblem) {
       setProblem(currentProblem as Problem);
@@ -81,7 +81,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   }
 
   if (!user) {
-    return null; // This should never happen due to the redirect above
+    return null;
   }
 
   return (
@@ -89,9 +89,10 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
       <Toaster position="top-right" />
       <div className="h-[calc(100vh-64px)] flex">
         <div className="w-[45%] overflow-y-auto border-r border-gray-200 dark:border-gray-700">
-          <ProblemStatement 
-            problem={problem} 
+          <ProblemStatement
+            problem={problem}
             submissionResult={submissionResult}
+            isSubmitting={isSubmitting}
           />
         </div>
         <div className="w-[55%]">
