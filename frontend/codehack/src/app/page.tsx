@@ -188,7 +188,7 @@ export default function Home() {
       <footer className="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12 mt-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="text-teal-500 dark:text-teal-400 font-bold text-2xl mb-6">CodeMaster</div>
+            <div className="text-teal-500 dark:text-teal-400 font-bold text-2xl mb-6">CodeHack</div>
             <p className="text-slate-600 dark:text-slate-400 mb-8">Helping developers become better problem solvers since 2023</p>
             <div className="flex justify-center space-x-6">
               <a href="#" className="text-slate-500 hover:text-teal-500 dark:text-slate-400 dark:hover:text-teal-400">

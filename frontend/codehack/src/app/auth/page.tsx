@@ -136,23 +136,29 @@ export default function AuthPage() {
               />
             </div>
 
-            <div className="flex justify-center space-x-4">
-              <button
-                type="submit"
-                disabled={loading}
-                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-              >
-                {loading ? 'Signing in...' : isLogin ? 'Sign in' : 'Create account'}
-              </button>
-              <button
-                onClick={handleDemoLogin}
-                disabled={loading}
-                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-105 ${loading ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-              >
-                <span className="font-bold">Demo Account</span>
-              </button>
+            <div className="flex flex-col items-center space-y-4 mt-6">
+              <div className="w-full flex flex-col items-center">
+                <button
+                  onClick={handleDemoLogin}
+                  disabled={loading}
+                  className={`w-full flex items-center justify-center py-4 px-6 border-2 border-teal-500 rounded-xl shadow-lg text-lg font-bold text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-4 focus:ring-teal-400 transition-all duration-300 transform hover:scale-105 relative animate-pulse ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  style={{ boxShadow: '0 0 16px 4px #14b8a6' }}
+                >
+                  <svg className="w-6 h-6 mr-2 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 20a8 8 0 100-16 8 8 0 000 16z" /></svg>
+                  Demo Account
+                  <span className="ml-2 px-2 py-0.5 bg-teal-400 text-teal-900 text-xs rounded-full font-semibold animate-bounce">Try Instantly</span>
+                </button>
+                <span className="mt-2 text-xs text-teal-700 font-medium">No signup required. Experience all features instantly!</span>
+              </div>
+              <div className="flex justify-center w-full space-x-4">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {loading ? 'Signing in...' : isLogin ? 'Sign in' : 'Create account'}
+                </button>
+              </div>
             </div>
 
             <div className="mt-6 text-center">

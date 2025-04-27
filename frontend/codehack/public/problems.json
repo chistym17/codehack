@@ -53,11 +53,11 @@
       },
       "cpp": {
         "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
-        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    solve();\n    return 0;\n}"
       },
       "c": {
         "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
-        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    solve();\n    return 0;\n}"
       }
     },
     "test_cases": [
@@ -536,13 +536,1462 @@
         "output": "5\n7\n9"
       },
       {
-        "input": "2 3\n1 2 3\n4 5 6\n0 0 0\n0 0 0",
-        "output": "1 2 3\n4 5 6"
+        "input": "2 3\n1 2 3\n0 0 0\n0 0 0",
+        "output": "1 2 3\n0 0 0"
       },
       {
         "input": "3 3\n1 1 1\n1 1 1\n1 1 1",
         "output": "2 2 2\n2 2 2\n2 2 2"
       }
+    ]
+  },
+  {
+    "sid": 14,
+    "slug": "count-digits",
+    "statement": "Given an integer N, count the number of digits in it.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "int countDigits(int n) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int n;\n    cin >> n;\n    cout << countDigits(n) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nint countDigits(int n) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\\n\", countDigits(n));\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "123",
+        "output": "3"
+      },
+      {
+        "input": "5",
+        "output": "1"
+      },
+      {
+        "input": "10000",
+        "output": "5"
+      },
+      {
+        "input": "0",
+        "output": "1"
+      },
+      {
+        "input": "9876",
+        "output": "4"
+      }
+    ]
+  },
+  {
+    "sid": 15,
+    "slug": "lcm-calculator",
+    "statement": "Calculate the least common multiple (LCM) of two positive integers A and B.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    a, b = map(int, input().split())\n    # your code here\n",
+        "boilerplate": "def solve():\n    a, b = map(int, input().split())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "int lcm(int a, int b) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << lcm(a, b) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nint lcm(int a, int b) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", lcm(a, b));\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "12 18",
+        "output": "36"
+      },
+      {
+        "input": "5 7",
+        "output": "35"
+      },
+      {
+        "input": "3 9",
+        "output": "9"
+      },
+      {
+        "input": "8 4",
+        "output": "8"
+      },
+      {
+        "input": "17 13",
+        "output": "221"
+      }
+    ]
+  },
+  {
+    "sid": 16,
+    "slug": "second-largest",
+    "statement": "Find the second largest element in an array of N integers. It is guaranteed that all elements in the array are distinct.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint findSecondLargest(vector<int>& arr) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    cout << findSecondLargest(arr) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nint findSecondLargest(int arr[], int n) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    printf(\"%d\\n\", findSecondLargest(arr, n));\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "5\n1 2 3 4 5",
+        "output": "4"
+      },
+      {
+        "input": "3\n10 20 30",
+        "output": "20"
+      },
+      {
+        "input": "4\n5 1 2 8",
+        "output": "5"
+      },
+      {
+        "input": "6\n-1 -5 -3 -2 -10 -6",
+        "output": "-2"
+      },
+      {
+        "input": "7\n9 8 7 6 5 4 3",
+        "output": "8"
+      }
+    ]
+  },
+  {
+    "sid": 17,
+    "slug": "power-calculation",
+    "statement": "Calculate the value of A raised to the power of B (A^B), where A and B are non-negative integers.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    a, b = map(int, input().split())\n    # your code here\n",
+        "boilerplate": "def solve():\n    a, b = map(int, input().split())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "int power(int a, int b) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << power(a, b) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nint power(int a, int b) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", power(a, b));\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "2 3",
+        "output": "8"
+      },
+      {
+        "input": "5 2",
+        "output": "25"
+      },
+      {
+        "input": "3 4",
+        "output": "81"
+      },
+      {
+        "input": "7 0",
+        "output": "1"
+      },
+      {
+        "input": "10 1",
+        "output": "10"
+      }
+    ]
+  },
+  {
+    "sid": 18,
+    "slug": "case-converter",
+    "statement": "Given a string S, convert all lowercase letters to uppercase and all uppercase letters to lowercase. Other characters remain unchanged.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring convertCase(string s) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    string s;\n    getline(cin, s);\n    cout << convertCase(s) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nvoid convertCase(char* s) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\n{user_code}\n\nint main() {\n    char s[1000];\n    scanf(\"%[^\\n]\", s);\n    convertCase(s);\n    printf(\"%s\\n\", s);\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "Hello World",
+        "output": "hELLO wORLD"
+      },
+      {
+        "input": "UPPER lower",
+        "output": "upper LOWER"
+      },
+      {
+        "input": "AbCdEf",
+        "output": "aBcDeF"
+      },
+      {
+        "input": "123!@#",
+        "output": "123!@#"
+      },
+      {
+        "input": "MiXeD 123 CaSe",
+        "output": "mIxEd 123 cAsE"
+      }
+    ]
+  },
+  {
+    "sid": 19,
+    "slug": "decimal-to-binary",
+    "statement": "Convert a decimal number to its binary representation as a string.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    decimal = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    decimal = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring decimalToBinary(int decimal) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int decimal;\n    cin >> decimal;\n    cout << decimalToBinary(decimal) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid decimalToBinary(int decimal, char* binary) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\n{user_code}\n\nint main() {\n    int decimal;\n    char binary[100];\n    scanf(\"%d\", &decimal);\n    decimalToBinary(decimal, binary);\n    printf(\"%s\\n\", binary);\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "10",
+        "output": "1010"
+      },
+      {
+        "input": "7",
+        "output": "111"
+      },
+      {
+        "input": "0",
+        "output": "0"
+      },
+      {
+        "input": "1",
+        "output": "1"
+      },
+      {
+        "input": "42",
+        "output": "101010"
+      }
+    ]
+  },
+  {
+    "sid": 20,
+    "slug": "word-count",
+    "statement": "Given a string S, count the number of words in it. Words are separated by one or more spaces.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint countWords(string s) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    string s;\n    getline(cin, s);\n    cout << countWords(s) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nint countWords(char* s) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\n{user_code}\n\nint main() {\n    char s[1000];\n    scanf(\"%[^\\n]\", s);\n    printf(\"%d\\n\", countWords(s));\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "Hello World",
+        "output": "2"
+      },
+      {
+        "input": "One Two Three Four",
+        "output": "4"
+      },
+      {
+        "input": "Programming  is   fun",
+        "output": "3"
+      },
+      {
+        "input": "SingleWord",
+        "output": "1"
+      },
+      {
+        "input": "   Spaces   Around   Words   ",
+        "output": "3"
+      }
+    ]
+  },
+  {
+    "sid": 21,
+    "slug": "matrix-transpose",
+    "statement": "Given a matrix A of size N x M, calculate its transpose. The transpose of a matrix is obtained by swapping its rows and columns.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n, m = map(int, input().split())\n    A = []\n    for i in range(n):\n        A.append(list(map(int, input().split())))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n, m = map(int, input().split())\n    A = []\n    for i in range(n):\n        A.append(list(map(int, input().split())))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<vector<int>> transpose(vector<vector<int>>& A, int n, int m) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int n, m;\n    cin >> n >> m;\n    vector<vector<int>> A(n, vector<int>(m));\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            cin >> A[i][j];\n    vector<vector<int>> B = transpose(A, n, m);\n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < n; j++) {\n            cout << B[i][j];\n            if (j < n - 1) cout << \" \";\n        }\n        cout << endl;\n    }\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid transpose(int A[][100], int B[][100], int n, int m) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int n, m;\n    scanf(\"%d %d\", &n, &m);\n    int A[100][100], B[100][100];\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < m; j++)\n            scanf(\"%d\", &A[i][j]);\n    transpose(A, B, n, m);\n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < n; j++) {\n            printf(\"%d\", B[i][j]);\n            if (j < n - 1) printf(\" \");\n        }\n        printf(\"\\n\");\n    }\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "2 3\n1 2 3\n4 5 6",
+        "output": "1 4\n2 5\n3 6"
+      },
+      {
+        "input": "3 2\n1 2\n3 4\n5 6",
+        "output": "1 3 5\n2 4 6"
+      },
+      {
+        "input": "1 3\n7 8 9",
+        "output": "7\n8\n9"
+      },
+      {
+        "input": "3 1\n1\n2\n3",
+        "output": "1 2 3"
+      },
+      {
+        "input": "2 2\n1 2\n3 4",
+        "output": "1 3\n2 4"
+      }
+    ]
+  },
+  {
+    "sid": 22,
+    "slug": "armstrong-number",
+    "statement": "Determine if a given number N is an Armstrong number. An Armstrong number is a number that is equal to the sum of its own digits each raised to the power of the number of digits. For example, 153 is an Armstrong number because 1^3 + 5^3 + 3^3 = 153. Print 'Yes' if it is an Armstrong number, otherwise print 'No'.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <cmath>\nusing namespace std;\n\nbool isArmstrong(int n) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <cmath>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int n;\n    cin >> n;\n    if (isArmstrong(n)) cout << \"Yes\" << endl;\n    else cout << \"No\" << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <math.h>\n\nint isArmstrong(int n) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <math.h>\n\n{user_code}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    if (isArmstrong(n)) printf(\"Yes\\n\");\n    else printf(\"No\\n\");\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "153",
+        "output": "Yes"
+      },
+      {
+        "input": "370",
+        "output": "Yes"
+      },
+      {
+        "input": "123",
+        "output": "No"
+      },
+      {
+        "input": "1",
+        "output": "Yes"
+      },
+      {
+        "input": "1634",
+        "output": "Yes"
+      }
+    ]
+  },
+  {
+    "sid": 23,
+    "slug": "merge-sorted-arrays",
+    "statement": "Given two sorted arrays A and B of size N and M respectively, merge them into a single sorted array C.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    A = list(map(int, input().split()))\n    m = int(input())\n    B = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    A = list(map(int, input().split()))\n    m = int(input())\n    B = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvector<int> mergeSortedArrays(vector<int>& A, vector<int>& B) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int n, m;\n    cin >> n;\n    vector<int> A(n);\n    for (int i = 0; i < n; i++) cin >> A[i];\n    cin >> m;\n    vector<int> B(m);\n    for (int i = 0; i < m; i++) cin >> B[i];\n    vector<int> C = mergeSortedArrays(A, B);\n    for (int i = 0; i < C.size(); i++) {\n        cout << C[i];\n        if (i < C.size() - 1) cout << \" \";\n    }\n    cout << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid mergeSortedArrays(int A[], int n, int B[], int m, int C[]) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int n, m;\n    scanf(\"%d\", &n);\n    int A[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &A[i]);\n    scanf(\"%d\", &m);\n    int B[m];\n    for (int i = 0; i < m; i++) scanf(\"%d\", &B[i]);\n    int C[n+m];\n    mergeSortedArrays(A, n, B, m, C);\n    for (int i = 0; i < n+m; i++) {\n        printf(\"%d\", C[i]);\n        if (i < n+m-1) printf(\" \");\n    }\n    printf(\"\\n\");\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "3\n1 3 5\n3\n2 4 6",
+        "output": "1 2 3 4 5 6"
+      },
+      {
+        "input": "5\n1 2 3 4 5\n0",
+        "output": "1 2 3 4 5"
+      },
+      {
+        "input": "0\n\n4\n10 20 30 40",
+        "output": "10 20 30 40"
+      },
+      {
+        "input": "3\n-3 0 5\n2\n-1 7",
+        "output": "-3 -1 0 5 7"
+      },
+      {
+        "input": "4\n2 4 6 8\n3\n1 3 5",
+        "output": "1 2 3 4 5 6 8"
+      }
+    ]
+  },
+  {
+    "sid": 24,
+    "slug": "perfect-number",
+    "statement": "Determine if a given number N is a perfect number. A perfect number is a positive integer that is equal to the sum of its proper divisors (excluding itself). For example, 6 is a perfect number because the sum of its proper divisors (1, 2, 3) is equal to 6. Print 'Yes' if it is a perfect number, otherwise print 'No'.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nbool isPerfectNumber(int n) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    int n;\n    cin >> n;\n    if (isPerfectNumber(n)) cout << \"Yes\" << endl;\n    else cout << \"No\" << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nint isPerfectNumber(int n) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\n{user_code}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    if (isPerfectNumber(n)) printf(\"Yes\\n\");\n    else printf(\"No\\n\");\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "6",
+        "output": "Yes"
+      },
+      {
+        "input": "28",
+        "output": "Yes"
+      },
+      {
+        "input": "12",
+        "output": "No"
+      },
+      {
+        "input": "1",
+        "output": "No"
+      },
+      {
+        "input": "496",
+        "output": "Yes"
+      }
+    ]
+  },
+  {
+    "sid": 25,
+    "slug": "string-compression",
+    "statement": "Implement a basic string compression algorithm. For a string with repeated characters, replace consecutive repeated characters with the character followed by the count. If the compressed string is not smaller than the original string, return the original string. For example, 'aabcccccaaa' would become 'a2b1c5a3'.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring compressString(string s) {\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\n{user_code}\n\nint main() {\n    string s;\n    cin >> s;\n    cout << compressString(s) << endl;\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid compressString(char* s, char* result) {\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\n{user_code}\n\nint main() {\n    char s[1000], result[2000];\n    scanf(\"%s\", s);\n    compressString(s, result);\n    printf(\"%s\\n\", result);\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      {
+        "input": "aabcccccaaa",
+        "output": "a2b1c5a3"
+      },
+      {
+        "input": "abcd",
+        "output": "abcd"
+      },
+      {
+        "input": "aaabbbccc",
+        "output": "a3b3c3"
+      },
+      {
+        "input": "aaa",
+        "output": "a3"
+      },
+      {
+        "input": "aaaaaaaaaaa",
+        "output": "a11"
+      }
+    ]
+  },
+  {
+    "sid": 26,
+    "slug": "reverse-string",
+    "statement": "Given a string S, print its reverse.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "hello", "output": "olleh" },
+      { "input": "world", "output": "dlrow" },
+      { "input": "a", "output": "a" },
+      { "input": "racecar", "output": "racecar" },
+      { "input": "12345", "output": "54321" }
+    ]
+  },
+  {
+    "sid": 27,
+    "slug": "even-or-odd",
+    "statement": "Given an integer N, print 'Even' if it is even, otherwise print 'Odd'.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "2", "output": "Even" },
+      { "input": "7", "output": "Odd" },
+      { "input": "0", "output": "Even" },
+      { "input": "-4", "output": "Even" },
+      { "input": "-3", "output": "Odd" }
+    ]
+  },
+  {
+    "sid": 28,
+    "slug": "sum-of-digits",
+    "statement": "Given an integer N, find the sum of its digits.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "123", "output": "6" },
+      { "input": "4567", "output": "22" },
+      { "input": "0", "output": "0" },
+      { "input": "9999", "output": "36" },
+      { "input": "-123", "output": "6" }
+    ]
+  },
+  {
+    "sid": 29,
+    "slug": "fibonacci-number",
+    "statement": "Given an integer N, print the Nth Fibonacci number (0-indexed, F(0) = 0, F(1) = 1).",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "0", "output": "0" },
+      { "input": "1", "output": "1" },
+      { "input": "5", "output": "5" },
+      { "input": "10", "output": "55" },
+      { "input": "15", "output": "610" }
+    ]
+  },
+  {
+    "sid": 30,
+    "slug": "factorial",
+    "statement": "Given an integer N, print its factorial.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "0", "output": "1" },
+      { "input": "1", "output": "1" },
+      { "input": "5", "output": "120" },
+      { "input": "7", "output": "5040" },
+      { "input": "10", "output": "3628800" }
+    ]
+  },
+  {
+    "sid": 31,
+    "slug": "sum-of-array",
+    "statement": "Given an array of N integers, print the sum of all elements.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5\n1 2 3 4 5", "output": "15" },
+      { "input": "3\n10 20 30", "output": "60" },
+      { "input": "4\n-1 -2 -3 -4", "output": "-10" },
+      { "input": "1\n100", "output": "100" },
+      { "input": "2\n0 0", "output": "0" }
+    ]
+  },
+  {
+    "sid": 32,
+    "slug": "count-uppercase-letters",
+    "statement": "Given a string S, count the number of uppercase letters in it.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "HelloWorld", "output": "2" },
+      { "input": "ABCdef", "output": "3" },
+      { "input": "noUppercase", "output": "1" },
+      { "input": "UPPER", "output": "5" },
+      { "input": "lower", "output": "0" }
+    ]
+  },
+  {
+    "sid": 33,
+    "slug": "is-leap-year",
+    "statement": "Given a year Y, determine if it is a leap year. Print 'Yes' if it is a leap year, otherwise print 'No'.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    y = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    y = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int y;\n    cin >> y;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int y;\n    cin >> y;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int y;\n    scanf(\"%d\", &y);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int y;\n    scanf(\"%d\", &y);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "2020", "output": "Yes" },
+      { "input": "1900", "output": "No" },
+      { "input": "2000", "output": "Yes" },
+      { "input": "2021", "output": "No" },
+      { "input": "2400", "output": "Yes" }
+    ]
+  },
+  {
+    "sid": 34,
+    "slug": "find-minimum",
+    "statement": "Given an array of N integers, print the minimum value.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5\n3 1 4 1 5", "output": "1" },
+      { "input": "3\n10 20 30", "output": "10" },
+      { "input": "4\n-1 -2 -3 -4", "output": "-4" },
+      { "input": "1\n100", "output": "100" },
+      { "input": "2\n0 0", "output": "0" }
+    ]
+  },
+  {
+    "sid": 35,
+    "slug": "count-spaces",
+    "statement": "Given a string S, count the number of spaces in it.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "hello world", "output": "1" },
+      { "input": "a b c d", "output": "3" },
+      { "input": "nospaces", "output": "0" },
+      { "input": "   ", "output": "3" },
+      { "input": "one  two", "output": "2" }
+    ]
+  },
+  {
+    "sid": 36,
+    "slug": "absolute-value",
+    "statement": "Given an integer N, print its absolute value.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5", "output": "5" },
+      { "input": "-7", "output": "7" },
+      { "input": "0", "output": "0" },
+      { "input": "123", "output": "123" },
+      { "input": "-42", "output": "42" }
+    ]
+  },
+  {
+    "sid": 37,
+    "slug": "count-words",
+    "statement": "Given a string S, count the number of words in it. Words are separated by spaces.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <sstream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <sstream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "hello world", "output": "2" },
+      { "input": "a b c d", "output": "4" },
+      { "input": "nospaces", "output": "1" },
+      { "input": "   ", "output": "0" },
+      { "input": "one  two", "output": "2" }
+    ]
+  },
+  {
+    "sid": 38,
+    "slug": "square-number",
+    "statement": "Given an integer N, print its square (N*N).",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "2", "output": "4" },
+      { "input": "-3", "output": "9" },
+      { "input": "0", "output": "0" },
+      { "input": "10", "output": "100" },
+      { "input": "7", "output": "49" }
+    ]
+  },
+  {
+    "sid": 39,
+    "slug": "count-lowercase-letters",
+    "statement": "Given a string S, count the number of lowercase letters in it.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "HelloWorld", "output": "8" },
+      { "input": "ABCdef", "output": "3" },
+      { "input": "noUppercase", "output": "10" },
+      { "input": "UPPER", "output": "0" },
+      { "input": "lower", "output": "5" }
+    ]
+  },
+  {
+    "sid": 40,
+    "slug": "is-multiple-of-three",
+    "statement": "Given an integer N, print 'Yes' if it is a multiple of 3, otherwise print 'No'.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "3", "output": "Yes" },
+      { "input": "9", "output": "Yes" },
+      { "input": "10", "output": "No" },
+      { "input": "0", "output": "Yes" },
+      { "input": "7", "output": "No" }
+    ]
+  },
+  {
+    "sid": 41,
+    "slug": "count-zeros",
+    "statement": "Given an integer N, count the number of zeros in its decimal representation.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char n[1000];\n    scanf(\"%s\", n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char n[1000];\n    scanf(\"%s\", n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "100200", "output": "4" },
+      { "input": "0", "output": "1" },
+      { "input": "12345", "output": "0" },
+      { "input": "100000", "output": "5" },
+      { "input": "908070", "output": "3" }
+    ]
+  },
+  {
+    "sid": 42,
+    "slug": "swap-case",
+    "statement": "Given a string S, swap the case of each character (lowercase to uppercase and vice versa).",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "Hello", "output": "hELLO" },
+      { "input": "WORLD", "output": "world" },
+      { "input": "aBcD", "output": "AbCd" },
+      { "input": "123", "output": "123" },
+      { "input": "Code123FORCE", "output": "cODE123force" }
+    ]
+  },
+  {
+    "sid": 43,
+    "slug": "product-of-digits",
+    "statement": "Given an integer N, find the product of its digits.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char n[1000];\n    scanf(\"%s\", n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char n[1000];\n    scanf(\"%s\", n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "1234", "output": "24" },
+      { "input": "111", "output": "1" },
+      { "input": "0", "output": "0" },
+      { "input": "999", "output": "729" },
+      { "input": "101", "output": "0" }
+    ]
+  },
+  {
+    "sid": 44,
+    "slug": "remove-vowels",
+    "statement": "Given a string S, remove all vowels from it (a, e, i, o, u, both uppercase and lowercase).",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "hello", "output": "hll" },
+      { "input": "AEIOU", "output": "" },
+      { "input": "Codeforces", "output": "Cdfrcs" },
+      { "input": "aAbE", "output": "b" },
+      { "input": "xyz", "output": "xyz" }
+    ]
+  },
+  {
+    "sid": 45,
+    "slug": "sum-of-evens",
+    "statement": "Given an array of N integers, print the sum of all even numbers.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5\n1 2 3 4 5", "output": "6" },
+      { "input": "4\n2 4 6 8", "output": "20" },
+      { "input": "3\n1 3 5", "output": "0" },
+      { "input": "2\n0 0", "output": "0" },
+      { "input": "6\n1 2 3 4 5 6", "output": "12" }
+    ]
+  },
+  {
+    "sid": 46,
+    "slug": "count-consonants",
+    "statement": "Given a string S, count the number of consonants in it (case-insensitive, a-z).",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "hello", "output": "3" },
+      { "input": "AEIOU", "output": "0" },
+      { "input": "Codeforces", "output": "7" },
+      { "input": "aAbE", "output": "1" },
+      { "input": "xyz", "output": "3" }
+    ]
+  },
+  {
+    "sid": 47,
+    "slug": "divisible-by-five",
+    "statement": "Given an integer N, print 'Yes' if it is divisible by 5, otherwise print 'No'.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "10", "output": "Yes" },
+      { "input": "7", "output": "No" },
+      { "input": "0", "output": "Yes" },
+      { "input": "25", "output": "Yes" },
+      { "input": "13", "output": "No" }
+    ]
+  },
+  {
+    "sid": 48,
+    "slug": "first-uppercase",
+    "statement": "Given a string S, print the first uppercase letter in it. If there is none, print '-1'.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "helloWorld", "output": "W" },
+      { "input": "abc", "output": "-1" },
+      { "input": "Abc", "output": "A" },
+      { "input": "aBcD", "output": "B" },
+      { "input": "xyzZ", "output": "Z" }
+    ]
+  },
+  {
+    "sid": 49,
+    "slug": "sum-of-odds",
+    "statement": "Given an array of N integers, print the sum of all odd numbers.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5\n1 2 3 4 5", "output": "9" },
+      { "input": "4\n2 4 6 8", "output": "0" },
+      { "input": "3\n1 3 5", "output": "9" },
+      { "input": "2\n0 1", "output": "1" },
+      { "input": "6\n1 2 3 4 5 6", "output": "9" }
+    ]
+  },
+  {
+    "sid": 50,
+    "slug": "repeat-string",
+    "statement": "Given a string S and an integer N, print the string S repeated N times.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    int n;\n    cin >> s >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    int n;\n    cin >> s >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    int n;\n    scanf(\"%s %d\", s, &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    int n;\n    scanf(\"%s %d\", s, &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "abc\n3", "output": "abcabcabc" },
+      { "input": "x\n5", "output": "xxxxx" },
+      { "input": "hello\n1", "output": "hello" },
+      { "input": "z\n0", "output": "" },
+      { "input": "xy\n2", "output": "xyxy" }
+    ]
+  },
+  {
+    "sid": 51,
+    "slug": "palindrome-check",
+    "statement": "Given a string S, determine if it is a palindrome (reads the same forwards and backwards). Print 'Yes' or 'No'.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    cin >> s;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    scanf(\"%s\", s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "level", "output": "Yes" },
+      { "input": "abcba", "output": "Yes" },
+      { "input": "abc", "output": "No" },
+      { "input": "madam", "output": "Yes" },
+      { "input": "hello", "output": "No" }
+    ]
+  },
+  {
+    "sid": 52,
+    "slug": "longest-word",
+    "statement": "Given a sentence S, print the longest word in the sentence. If there are multiple, print the first one.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <sstream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <sstream>\n#include <string>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "I love programming", "output": "programming" },
+      { "input": "hello world", "output": "hello" },
+      { "input": "a ab abc abcd", "output": "abcd" },
+      { "input": "one two three four", "output": "three" },
+      { "input": "same size", "output": "same" }
+    ]
+  },
+  {
+    "sid": 53,
+    "slug": "subarray-with-given-sum",
+    "statement": "Given an array of N integers and an integer S, find if there exists a contiguous subarray whose sum is exactly S. Print 'Yes' or 'No'.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n, s = map(int, input().split())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n, s = map(int, input().split())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n, s;\n    cin >> n >> s;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n, s;\n    cin >> n >> s;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n, s;\n    scanf(\"%d %d\", &n, &s);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n, s;\n    scanf(\"%d %d\", &n, &s);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5 12\n1 2 3 7 5", "output": "Yes" },
+      { "input": "5 10\n1 2 3 4 5", "output": "Yes" },
+      { "input": "4 15\n1 2 3 4", "output": "No" },
+      { "input": "3 6\n2 4 2", "output": "Yes" },
+      { "input": "5 100\n1 2 3 4 5", "output": "No" }
+    ]
+  },
+  {
+    "sid": 54,
+    "slug": "distinct-elements",
+    "statement": "Given an array of N integers, print the number of distinct elements in the array.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <set>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <set>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5\n1 2 2 3 4", "output": "4" },
+      { "input": "4\n1 1 1 1", "output": "1" },
+      { "input": "6\n1 2 3 4 5 6", "output": "6" },
+      { "input": "3\n2 2 2", "output": "1" },
+      { "input": "7\n1 2 3 2 1 4 5", "output": "5" }
+    ]
+  },
+  {
+    "sid": 55,
+    "slug": "maximum-subarray-sum",
+    "statement": "Given an array of N integers, find the maximum sum of a contiguous subarray (Kadane's algorithm).",
+    "difficulty": "hard",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5\n1 2 3 -2 5", "output": "9" },
+      { "input": "4\n-1 -2 -3 -4", "output": "-1" },
+      { "input": "6\n-2 -3 4 -1 -2 1 5 -3", "output": "7" },
+      { "input": "3\n2 3 -1", "output": "5" },
+      { "input": "7\n-2 -3 4 -1 -2 1 5 -3", "output": "7" }
+    ]
+  },
+  {
+    "sid": 56,
+    "slug": "count-primes",
+    "statement": "Given an integer N, count the number of prime numbers less than or equal to N.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "10", "output": "4" },
+      { "input": "20", "output": "8" },
+      { "input": "2", "output": "1" },
+      { "input": "1", "output": "0" },
+      { "input": "30", "output": "10" }
+    ]
+  },
+  {
+    "sid": 57,
+    "slug": "reverse-words",
+    "statement": "Given a sentence S, print the sentence with the order of words reversed.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    s = input().strip()\n    # your code here\n",
+        "boilerplate": "def solve():\n    s = input().strip()\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <sstream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <sstream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    string s;\n    getline(cin, s);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n#include <string.h>\n\nvoid solve() {\n    char s[1000];\n    fgets(s, sizeof(s), stdin);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "hello world", "output": "world hello" },
+      { "input": "I love programming", "output": "programming love I" },
+      { "input": "a b c d", "output": "d c b a" },
+      { "input": "single", "output": "single" },
+      { "input": "one two", "output": "two one" }
+    ]
+  },
+  {
+    "sid": 58,
+    "slug": "nth-prime",
+    "statement": "Given an integer N, print the Nth prime number (1-based indexing).",
+    "difficulty": "hard",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "1", "output": "2" },
+      { "input": "2", "output": "3" },
+      { "input": "3", "output": "5" },
+      { "input": "5", "output": "11" },
+      { "input": "10", "output": "29" }
+    ]
+  },
+  {
+    "sid": 59,
+    "slug": "rotate-array",
+    "statement": "Given an array of N integers and an integer K, rotate the array to the right by K steps.",
+    "difficulty": "medium",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n, k = map(int, input().split())\n    arr = list(map(int, input().split()))\n    # your code here\n",
+        "boilerplate": "def solve():\n    n, k = map(int, input().split())\n    arr = list(map(int, input().split()))\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n, k;\n    cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nvoid solve() {\n    int n, k;\n    cin >> n >> k;\n    vector<int> arr(n);\n    for (int i = 0; i < n; i++) cin >> arr[i];\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n, k;\n    scanf(\"%d %d\", &n, &k);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n, k;\n    scanf(\"%d %d\", &n, &k);\n    int arr[n];\n    for (int i = 0; i < n; i++) scanf(\"%d\", &arr[i]);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "5 2\n1 2 3 4 5", "output": "4 5 1 2 3" },
+      { "input": "4 1\n1 2 3 4", "output": "4 1 2 3" },
+      { "input": "3 3\n1 2 3", "output": "1 2 3" },
+      { "input": "6 4\n10 20 30 40 50 60", "output": "30 40 50 60 10 20" },
+      { "input": "2 1\n9 8", "output": "8 9" }
+    ]
+  },
+  {
+    "sid": 60,
+    "slug": "sum-of-divisors",
+    "statement": "Given an integer N, print the sum of all its positive divisors.",
+    "difficulty": "easy",
+    "functionTemplates": {
+      "python": {
+        "default": "def solve():\n    n = int(input())\n    # your code here\n",
+        "boilerplate": "def solve():\n    n = int(input())\n{user_code}\n\nsolve()"
+      },
+      "cpp": {
+        "default": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n    // your code here\n}",
+        "boilerplate": "#include <iostream>\nusing namespace std;\n\nvoid solve() {\n    int n;\n    cin >> n;\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      },
+      "c": {
+        "default": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n    // your code here\n}",
+        "boilerplate": "#include <stdio.h>\n\nvoid solve() {\n    int n;\n    scanf(\"%d\", &n);\n{user_code}\n}\n\nint main() {\n    solve();\n    return 0;\n}"
+      }
+    },
+    "test_cases": [
+      { "input": "6", "output": "12" },
+      { "input": "10", "output": "18" },
+      { "input": "1", "output": "1" },
+      { "input": "15", "output": "24" },
+      { "input": "28", "output": "56" }
     ]
   }
 ]

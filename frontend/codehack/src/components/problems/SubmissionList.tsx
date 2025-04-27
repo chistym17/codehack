@@ -12,23 +12,12 @@ interface SubmissionListProps {
   problemId: number;
 }
 
-const submissionCache: Record<string, { data: Submission[]; timestamp: number }> = {};
-const CACHE_DURATION = 5 * 60 * 1000;
-
 const SubmissionList: React.FC<SubmissionListProps> = ({ userId, problemId }) => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const cacheKey = `${userId}-${problemId}`;
-    const now = Date.now();
-    const cached = submissionCache[cacheKey];
-    if (cached && now - cached.timestamp < CACHE_DURATION) {
-      setSubmissions(cached.data);
-      setLoading(false);
-      return;
-    }
     const fetchSubmissions = async () => {
       setLoading(true);
       setError(null);
@@ -38,7 +27,6 @@ const SubmissionList: React.FC<SubmissionListProps> = ({ userId, problemId }) =>
         const data = await res.json();
         if (Array.isArray(data)) {
           setSubmissions(data);
-          submissionCache[cacheKey] = { data, timestamp: Date.now() };
         } else {
           setSubmissions([]);
         }
@@ -53,7 +41,7 @@ const SubmissionList: React.FC<SubmissionListProps> = ({ userId, problemId }) =>
   }, [userId, problemId]);
 
   if (loading) return <div>Loading submissions...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
+  if (error) return <div>No submissions found for this problem</div>;
   if (submissions.length === 0) return <div>No submissions found for this problem.</div>;
 
   return (
