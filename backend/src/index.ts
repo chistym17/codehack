@@ -35,6 +35,7 @@ const MAX_REQUEST_SIZE = '10mb';
 app.use(express.json({ limit: MAX_REQUEST_SIZE }));
 app.use(express.urlencoded({ limit: MAX_REQUEST_SIZE, extended: true }));
 
+
 app.use('/api/auth', authRoutes);
 app.use('/api/problems', problemRoutes);
 app.use('/api/submissions', submissionRoutes);
