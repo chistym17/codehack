@@ -9,6 +9,13 @@ import problems from '../../../../../public/problems.json';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
 
+// Loading spinner component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+  </div>
+);
+
 interface TestCase {
   input: string;
   output: string;
@@ -59,17 +66,19 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<SubmissionResponse | null>(null);
   const [selectedTab, setSelectedTab] = useState<'problem' | 'submissions'>('problem');
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    // Only redirect if user is explicitly null (not undefined)
+    if (loading) {
+      return;
+    }
+
     if (user === null) {
       router.push(`/auth?redirect=${encodeURIComponent(window.location.pathname)}`);
+      return;
     }
-  }, [user, router]);
 
-  useEffect(() => {
     if (!resolvedParams) return;
 
     const currentProblem = problems.find(p => p.slug === resolvedParams.slug);
@@ -77,16 +86,18 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
       setProblem(currentProblem as Problem);
       setCode(currentProblem.functionTemplates[language]?.default || '');
     }
-  }, [resolvedParams, language]);
+  }, [user, loading, resolvedParams, language, router]);
 
-  // Show loading state while auth is checking
-  if (user === undefined) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return <LoadingSpinner />;
   }
 
-  // Only show loading state if problem is not loaded
+  if (user === null) {
+    return null;
+  }
+
   if (!problem) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
