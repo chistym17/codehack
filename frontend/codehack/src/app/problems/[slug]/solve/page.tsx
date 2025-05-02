@@ -63,7 +63,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (user === null) {
       router.push(`/auth?redirect=${encodeURIComponent(window.location.pathname)}`);
     }
   }, [user, router]);
