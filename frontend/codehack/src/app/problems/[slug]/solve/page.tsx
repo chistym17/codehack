@@ -63,6 +63,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
   const router = useRouter();
 
   useEffect(() => {
+    // Only redirect if user is explicitly null (not undefined)
     if (user === null) {
       router.push(`/auth?redirect=${encodeURIComponent(window.location.pathname)}`);
     }
@@ -78,12 +79,14 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
     }
   }, [resolvedParams, language]);
 
-  if (!problem) {
+  // Show loading state while auth is checking
+  if (user === undefined) {
     return <div>Loading...</div>;
   }
 
-  if (!user) {
-    return null;
+  // Only show loading state if problem is not loaded
+  if (!problem) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -112,7 +115,7 @@ export default function ProblemSolvePage({ params }: { params: Promise<{ slug: s
               isSubmitting={isSubmitting}
             />
           ) : (
-            <SubmissionList userId={Number(user.id)} problemId={Number(problem.sid)} />
+            <SubmissionList userId={Number(user?.id)} problemId={Number(problem.sid)} />
           )}
         </div>
         <div className="w-[55%]">
